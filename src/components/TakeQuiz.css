@@ -1,0 +1,113 @@
+.take-quiz {
+    background-color: #f0f8ff; /* Light blue background */
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .quiz-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px; /* Space between heading and categories */
+  }
+  
+  .quiz-categories {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns in a row */
+    gap: 20px;
+    width: 100%; /* Ensure it takes full width */
+    max-width: 1200px; /* Optional: Set a max-width to control layout */
+    margin: 0 auto; /* Center grid horizontally */
+  }
+  
+  .quiz-category {
+    background-color: #4D9DE0; /* Use a color that matches your theme */
+    border-radius: 10px;
+    padding: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center; /* Center text inside each category */
+    transition: 0.3s ease;
+  }
+  
+  .quiz-category:hover {
+    background-color: #007BFF;
+  }
+  
+  /* Additional styles for quiz-card, question, options, etc. */
+  .quiz-card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .question {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  
+  .option {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    padding: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s ease;
+  }
+  
+  .option:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .option input {
+    margin-right: 10px;
+  }
+  
+  .option label {
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .next-btn {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+  }
+  
+  .next-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .quiz-categories {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .options {
+      grid-template-columns: 1fr;
+    }
+  }
+  

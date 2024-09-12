@@ -1,0 +1,118 @@
+/* CreateQuiz.css */
+
+.create-quiz {
+    background-color: #f0f8ff; /* Light blue background */
+    min-height: 100vh;
+    padding: 20px;
+  }
+  
+  .form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white; /* White background for the form box */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-container h1 {
+    font-size: 28px;
+    font-family: 'Poppins', sans-serif;
+    color: #4D9DE0;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group label {
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    border-color: #4D9DE0;;
+  }
+  
+  .horizontal-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .title-question {
+    flex: 1;
+    min-width: 300px;
+  }
+  
+  .options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .option-group {
+    flex: 1 1 45%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .option-group label {
+    font-size: 16px;
+  }
+  
+  button {
+    background-color: #4D9DE0; /* Button color */
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 20px auto;
+  }
+  
+  button:hover {
+    background-color: #3C82B3; /* Darker blue on hover */
+  }
+  
+  button[type="button"] {
+    background-color: #e0e0e0;
+    color: #333;
+    margin-top: 10px;
+  }
+  
+  button[type="button"]:hover {
+    background-color: #b3b3b3;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .horizontal-layout {
+      flex-direction: column;
+    }
+  
+    .options {
+      flex-direction: column;
+    }
+  
+    .option-group {
+      flex: 1 1 100%;
+    }
+  }
+  
