@@ -1,17 +1,17 @@
-import React from 'react';
-import './CreateQuiz.css';
+import React from "react";
+import "./CreateQuiz.css";
 
 const CreateQuiz = ({ quiz, setQuiz }) => {
   const handleTitleChange = (e) => {
     setQuiz({ ...quiz, title: e.target.value });
   };
-
+  //handle adding the new questions
   const handleQuestionChange = (index, e) => {
     const newQuestions = [...quiz.questions];
     newQuestions[index].question = e.target.value;
     setQuiz({ ...quiz, questions: newQuestions });
   };
-
+  //handle adding the new options
   const handleOptionChange = (qIndex, oIndex, e) => {
     const newQuestions = [...quiz.questions];
     newQuestions[qIndex].options[oIndex] = e.target.value;
@@ -21,38 +21,46 @@ const CreateQuiz = ({ quiz, setQuiz }) => {
   // Handle setting the correct answer
   const handleCorrectAnswerChange = (qIndex, e) => {
     const newQuestions = [...quiz.questions];
-    newQuestions[qIndex].correctAnswer = e.target.value; // Save the correct answer
+    newQuestions[qIndex].correctAnswer = e.target.value;
     setQuiz({ ...quiz, questions: newQuestions });
   };
-
+  //Handle adding new empty question, options, correct answer
   const handleAddQuestion = () => {
     setQuiz({
       ...quiz,
-      questions: [...quiz.questions, { question: '', options: ['', '', '', ''], correctAnswer: '' }]
+      questions: [
+        ...quiz.questions,
+        { question: "", options: ["", "", "", ""], correctAnswer: "" },
+      ],
     });
   };
-
+  //handling the submition of quiz questions
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const existingQuizzes = JSON.parse(localStorage.getItem('quizzes')) || [];
+    const existingQuizzes = JSON.parse(localStorage.getItem("quizzes")) || [];
 
     const newQuiz = {
       title: quiz.title,
       questions: quiz.questions,
-      completed: false // Track completion
+      completed: false,
     };
 
     existingQuizzes.push(newQuiz);
-    localStorage.setItem('quizzes', JSON.stringify(existingQuizzes));
+    localStorage.setItem("quizzes", JSON.stringify(existingQuizzes));
 
-    setQuiz({ title: '', questions: [{ question: '', options: ['', '', '', ''], correctAnswer: '' }] });
+    setQuiz({
+      title: "",
+      questions: [
+        { question: "", options: ["", "", "", ""], correctAnswer: "" },
+      ],
+    });
   };
 
   return (
     <div className="create-quiz">
       <div className="form-container">
-        <h1>Create Your Fun Quiz!</h1>
+        <h1>Create Your Quiz!</h1>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="title">Quiz Title:</label>
@@ -67,7 +75,9 @@ const CreateQuiz = ({ quiz, setQuiz }) => {
           </div>
           {quiz.questions.map((q, questionIndex) => (
             <div className="form-group" key={questionIndex}>
-              <label htmlFor={`question-${questionIndex}`}>Question {questionIndex + 1}:</label>
+              <label htmlFor={`question-${questionIndex}`}>
+                Question {questionIndex + 1}:
+              </label>
               <input
                 type="text"
                 id={`question-${questionIndex}`}
@@ -79,12 +89,16 @@ const CreateQuiz = ({ quiz, setQuiz }) => {
               <div className="options">
                 {q.options.map((option, optionIndex) => (
                   <div key={optionIndex} className="option-group">
-                    <label htmlFor={`option-${questionIndex}-${optionIndex}`}>Option {optionIndex + 1}:</label>
+                    <label htmlFor={`option-${questionIndex}-${optionIndex}`}>
+                      Option {optionIndex + 1}:
+                    </label>
                     <input
                       type="text"
                       id={`option-${questionIndex}-${optionIndex}`}
                       value={option}
-                      onChange={(e) => handleOptionChange(questionIndex, optionIndex, e)}
+                      onChange={(e) =>
+                        handleOptionChange(questionIndex, optionIndex, e)
+                      }
                       placeholder={`Option ${optionIndex + 1}`}
                       required
                     />
@@ -92,11 +106,13 @@ const CreateQuiz = ({ quiz, setQuiz }) => {
                 ))}
               </div>
               <div className="form-group">
-                <label htmlFor={`correct-answer-${questionIndex}`}>Correct Answer:</label>
+                <label htmlFor={`correct-answer-${questionIndex}`}>
+                  Correct Answer:
+                </label>
                 <input
                   type="text"
                   id={`correct-answer-${questionIndex}`}
-                  value={q.correctAnswer || ''}
+                  value={q.correctAnswer || ""}
                   onChange={(e) => handleCorrectAnswerChange(questionIndex, e)}
                   placeholder="Enter correct answer"
                   required
