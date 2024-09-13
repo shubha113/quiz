@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import './Result.css'; // Ensure this file contains styles for the Result component
+import './Result.css';
 
 const Result = () => {
   const [results, setResults] = useState([]);
 
+  //to retrive results
   useEffect(() => {
     const storedQuizzes = JSON.parse(localStorage.getItem('quizzes')) || [];
-    // Only show the latest 5 results
     setResults(storedQuizzes.filter(quiz => quiz.completed).slice(-6));
   }, []);
 
