@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import './TakeQuiz.css'; // Ensure you have responsive styling
+import './TakeQuiz.css';
 
 const TakeQuiz = () => {
   const [quizzes, setQuizzes] = useState([]);
   const [currentQuiz, setCurrentQuiz] = useState(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState([]);
-  const [timer, setTimer] = useState(60); // 60 seconds timer for each question
-  const [quizStatus, setQuizStatus] = useState('not_started'); // not_started, in_progress, completed
-  const [userScore, setUserScore] = useState(null); // Store user's score
+  const [timer, setTimer] = useState(60);
+  const [quizStatus, setQuizStatus] = useState('not_started');
+  const [userScore, setUserScore] = useState(null);
 
   // Load quizzes from localStorage on component mount
   useEffect(() => {
     const storedQuizzes = JSON.parse(localStorage.getItem('quizzes')) || [];
-    const incompleteQuizzes = storedQuizzes.filter(quiz => !quiz.completed); // Show only incomplete quizzes
+    const incompleteQuizzes = storedQuizzes.filter(quiz => !quiz.completed);
     setQuizzes(incompleteQuizzes);
   }, []);
 
+  // To show the time remaining to complete 1 quizz
   useEffect(() => {
     let interval;
     if (quizStatus === 'in_progress' && timer > 0) {
@@ -24,12 +25,13 @@ const TakeQuiz = () => {
         setTimer(prevTimer => prevTimer - 1);
       }, 1000);
     } else if (timer === 0) {
-      handleNextQuestion(); // Move to next question if timer runs out
+      handleNextQuestion();
     }
 
     return () => clearInterval(interval);
   }, [quizStatus, timer]);
 
+  // This function initializes the quiz when the user starts it.
   const startQuiz = (quiz) => {
     setCurrentQuiz(quiz);
     setCurrentQuestionIndex(0);
@@ -38,26 +40,29 @@ const TakeQuiz = () => {
     setQuizStatus('in_progress');
   };
 
+  // It handles the selection of an option during the quiz.
   const handleOptionChange = (optionText) => {
     setUserAnswers(prevAnswers => {
       const newAnswers = [...prevAnswers];
-      newAnswers[currentQuestionIndex] = optionText; // Store the selected option text
+      newAnswers[currentQuestionIndex] = optionText;
       return newAnswers;
     });
   };
 
+  //to check if their are more questions remaining to complete
   const handleNextQuestion = () => {
     if (currentQuestionIndex < currentQuiz.questions.length - 1) {
       setCurrentQuestionIndex(prevIndex => prevIndex + 1);
-      setTimer(60); // Reset timer for next question
+      setTimer(60); 
     } else {
       calculateScore();
     }
   };
 
+  //to calculate score
   const calculateScore = () => {
     const score = userAnswers.reduce((totalScore, answer, index) => {
-      const correctAnswer = currentQuiz.questions[index].correctAnswer; // The correct answer text
+      const correctAnswer = currentQuiz.questions[index].correctAnswer; 
       if (answer === correctAnswer) {
         totalScore += 1;
       }
@@ -123,7 +128,7 @@ const TakeQuiz = () => {
       ) : quizStatus === 'completed' ? (
         <div className="quiz-result">
           <h2>Quiz Completed!</h2>
-          <p>Your score: {userScore}%</p> {/* Display the correct score */}
+          <p>Your score: {userScore}%</p> 
           <button onClick={() => setQuizStatus('not_started')} className="next-btn">Back to Categories</button>
         </div>
       ) : null}
